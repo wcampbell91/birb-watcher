@@ -11,8 +11,8 @@ const Auth = () => {
   };
 
   return (
-    <div className="Auth">
-      <h2>Auth</h2>
+    <div className="Auth mt-2">
+      <h1>Auth</h1>
       <button className="btn btn-danger" onClick={loginClickEvent}>Google Log In</button>
     </div>
   );

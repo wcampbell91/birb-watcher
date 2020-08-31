@@ -11,6 +11,9 @@ const getBirbsByUid = (uid) => new Promise((resolve, reject) => {
     .catch((err) => reject(err));
 });
 
+const addBirb = () => axios.post(`${baseUrl}/birbs.json`);
+
 export default {
   getBirbsByUid,
+  addBirb,
 };
