@@ -1,5 +1,6 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import birbShape from '../../../helpers/props/birbShape';
 
@@ -10,34 +11,17 @@ class BirbCards extends React.Component {
 
   render() {
     const { birb } = this.props;
+
+    const singleBirbLink = `/birbs/${birb.id}`;
+
+    const editLink = `/edit/${birb.id}`;
     return (
       <div className="card mt-3 bg-dark text-light">
-        <div className="card-header text-uppercase">
-        <h1>{birb.type}</h1>
-        </div>
         <div className="card-body">
-          <h3>Notes: </h3>
-          <h4>{birb.notes}</h4>
+          <h1>{birb.type}</h1>
+          <Link to={singleBirbLink} className="btn-warning mr-3"><i className="fas fa-binoculars fa-lg" ></i></Link>
+          <Link to={editLink} className="btn-primary"><i className="far fa-edit fa-lg"></i></Link>
         </div>
-        <ul className="list-group list-group-flush text-left">
-          <li className="list-group-item bg-dark text-light">
-            <h4>Color:</h4>
-            <h5 className="text-center">{birb.color}</h5>
-          </li>
-          <li className="list-group-item bg-dark text-light">
-            <h4>Alternate Color:</h4>
-            <h5 className="text-center">{birb.altColor}</h5>
-          </li>
-          <li className="list-group-item bg-dark text-light">
-            <h4>Size:</h4>
-            <h5 className="text-center">{birb.size}</h5>
-          </li>
-          <li className="list-group-item bg-dark text-light">
-            <h4>Location:</h4>
-            <h5 className="text-center">{birb.location}</h5>
-          </li>
-        </ul>
-        <div className="card-text-muted">Last Seen: {birb.seenAt}</div>
       </div>
     );
   }

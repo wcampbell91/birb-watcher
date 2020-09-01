@@ -11,7 +11,6 @@ class Home extends React.Component {
   }
 
   getBirbs = () => {
-    console.error(authData.getUid());
     birbData.getBirbsByUid(authData.getUid())
       .then((res) => this.setState({ birbs: res }))
       .catch((err) => console.error(err));
