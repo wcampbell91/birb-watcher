@@ -65,8 +65,8 @@ class MyNavbar extends React.Component {
         </Collapse>
       </Navbar>
     </div>
-  );
-}
+    );
+  }
 }
 
 export default MyNavbar;

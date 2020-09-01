@@ -2,7 +2,9 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import '../components/pages/MyNavbar/MyNavbar.scss';
 
 body {
   background-color: $favColor;
-  font-family: 'Indie Flower', cursive;}
+  font-family: 'Indie Flower', cursive;
+}
