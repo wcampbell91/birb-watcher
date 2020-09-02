@@ -19,8 +19,8 @@ class BirbCards extends React.Component {
       <div className="card mt-3 bg-dark text-light">
         <div className="card-body">
           <h1>{birb.type}</h1>
-          <Link to={singleBirbLink} className="btn-warning mr-3"><i className="fas fa-binoculars fa-lg" ></i></Link>
-          <Link to={editLink} className="btn-primary"><i className="far fa-edit fa-lg"></i></Link>
+          <Link to={singleBirbLink} className="btn btn-warning mr-2"><i className="fas fa-binoculars fa-lg" ></i></Link>
+          <Link to={editLink} className="btn btn-primary"><i className="far fa-edit fa-lg"></i></Link>
         </div>
       </div>
     );
