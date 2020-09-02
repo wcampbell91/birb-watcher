@@ -28,19 +28,19 @@ class SingleBirb extends React.Component {
         <ul className="list-group list-group-flush text-left">
           <li className="list-group-item bg-dark text-light">
             <h4>Color:</h4>
-            <h5 className="text-center">{birb.color}</h5>
+            <h4 className="text-center">{birb.color}</h4>
           </li>
           <li className="list-group-item bg-dark text-light">
             <h4>Alternate Color:</h4>
-            <h5 className="text-center">{birb.altColor}</h5>
+            <h4 className="text-center">{birb.altColor}</h4>
           </li>
           <li className="list-group-item bg-dark text-light">
             <h4>Size:</h4>
-            <h5 className="text-center">{birb.size}</h5>
+            <h4 className="text-center">{birb.size}</h4>
           </li>
           <li className="list-group-item bg-dark text-light">
             <h4>Location:</h4>
-            <h5 className="text-center">{birb.location}</h5>
+            <h4 className="text-center">{birb.location}</h4>
           </li>
         </ul>
         <div className="card-text-muted">Last Seen: {birb.seenAt}</div>

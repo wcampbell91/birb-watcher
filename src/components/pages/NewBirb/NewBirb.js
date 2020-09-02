@@ -1,45 +1,91 @@
 import React from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+// import moment from 'moment';
+import _ from 'underscore';
+
 import authData from '../../../helpers/data/authData';
+import birbData from '../../../helpers/data/birbData';
 
 class NewBirb extends React.Component {
   state = {
-    birb: {},
+    type: '',
+    color: '',
+    size: '',
+    altColor: '',
+    wasSleeping: false,
+    seenAt: new Date(),
+    location: '',
+    notes: '',
   }
 
-  typeRef = React.createRef;
-
-  colorRef = React.createRef;
-
-  sizeRef = React.createRef
-
-  altColorRef = React.createRef;
-
-  sleepRef = React.createRef;
-
-  locationRef = React.createRef;
-
-  notesRef = React.createRef;
-
-  createBirb = (e) => {
+  changeTypeEvent = (e) => {
     e.preventDefault();
-    const { birb } = this.state;
+    this.setState({ type: e.target.value });
+  };
 
-    const newBirb = {
-      type: this.typeRef.current.value,
-      color: this.colorRef.current.value,
-      size: this.sizeRef.current.value,
-      altColor: this.altColorRer.current.value,
-      // wasSleeping: this.sleepRef.current.value,
-      location: this.locationRef.current.value,
-      notes: this.notesRef.current.value,
-      uid: authData.getUid(),
-    };
+  changeColorEvent = (e) => {
+    e.preventDefault();
+    this.setState({ color: e.target.value });
+  };
 
-    console.error(newBirb);
-    this.setState({ birb: newBirb });
+  changeSizeEvent = (e) => {
+    e.preventDefault();
+    this.setState({ size: e.target.value });
+  };
+
+  changeAltColorEvent = (e) => {
+    e.preventDefault();
+    this.setState({ altColor: e.target.value });
+  };
+
+  changeLocationEvent = (e) => {
+    e.preventDefault();
+    this.setState({ location: e.target.value });
+  };
+
+  changeNotesEvent = (e) => {
+    e.preventDefault();
+    this.setState({ notes: e.target.value });
+  };
+
+  changeSleepEvent = (e) => {
+    console.error(e.target);
+    e.target.checked
+      ? this.setState({ wasSleeping: true })
+      : this.setState({ wasSleeping: false });
+  };
+
+  seenAtEvent = (seenAt) => {
+    this.setState({ seenAt });
+  };
+
+  saveBirb = (e) => {
+    e.preventDefault();
+    const keysIWant = ['type', 'color', 'size', 'altColor', 'wasSleeping', 'seenAt', 'location', 'notes'];
+
+    const newBirb = _.pick(this.state, keysIWant);
+    newBirb.uid = authData.getUid();
+
+    birbData.addBirb(newBirb)
+      .then((res) => {
+        console.warn(res, 'new birb worked!');
+        this.props.history.push(`/birbs/${res.data.name}`);
+      })
+      .catch((err) => console.error('new birb broke', err));
   };
 
   render() {
+    const {
+      type,
+      color,
+      size,
+      altColor,
+      seenAt,
+      wasSleeping,
+      location,
+      notes,
+    } = this.state;
     return (
       <form className="col-6 offset-3">
       <div className="form-group">
@@ -49,9 +95,8 @@ class NewBirb extends React.Component {
           className="form-control"
           id="birbType"
           placeholder="Enter Birb Type"
-          ref={this.typeRef}
-          // value={title}
-          // onChange={this.changeTypeEvent}
+          value={ type }
+          onChange={this.changeTypeEvent}
         />
       </div>
       <div className="form-group">
@@ -61,9 +106,8 @@ class NewBirb extends React.Component {
           className="form-control"
           id="birbColor"
           placeholder="Enter Birb Color"
-          ref={this.colorRef}
-          // value={color}
-          // onChange={this.changeColorEvent}
+          value={ color }
+          onChange={this.changeColorEvent}
         />
       </div>
       <div className="form-group">
@@ -73,9 +117,8 @@ class NewBirb extends React.Component {
           className="form-control"
           id="birbSize"
           placeholder="Enter Birb Size"
-          ref={this.sizeRef}
-          // value={color}
-          // onChange={this.changeColorEvent}
+          value={ size }
+          onChange={this.changeSizeEvent}
         />
       </div>
       <div className="form-group">
@@ -85,9 +128,8 @@ class NewBirb extends React.Component {
           className="form-control"
           id="birbAltColor"
           placeholder="Enter Birb Alt Color"
-          ref={this.altColorRef}
-          // value={imageUrl}
-          // onChange={this.changeAltColorEvent}
+          value={ altColor }
+          onChange={this.changeAltColorEvent}
         />
       </div>
       <div className="form-group">
@@ -97,9 +139,8 @@ class NewBirb extends React.Component {
           className="form-control"
           id="birbLocation"
           placeholder="Enter Birb Location"
-          ref={this.locationRef}
-          // value={imageUrl}
-          // onChange={this.changeLocationEvent}
+          value={ location }
+          onChange={this.changeLocationEvent}
         />
       </div>
       <div className="form-group">
@@ -109,22 +150,29 @@ class NewBirb extends React.Component {
           className="form-control"
           id="birbNotes"
           placeholder="Enter Birb Notes"
-          ref={this.notesRef}
-          // value={imageUrl}
-          // onChange={this.changeNotesEvent}
+          value={ notes }
+          onChange={this.changeNotesEvent}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="birbSeenAt">Seen At: </label>
+        <DatePicker
+          selected={ seenAt }
+          onChange={this.seenAtEvent}
+          showTimeSelect
         />
       </div>
       <div className="form-check">
         <input
         type="checkbox"
-        className="form-check-input"
+        className="form-check-input mr-4 mb-3"
         id="wasSleeping"
-        // ref={this.sleepRef}
-        // onChange={this.changeSleepEvent}
+        value={ wasSleeping }
+        onChange={this.changeSleepEvent}
         />
         <label class="form-check-label" htmlFor="wasSleeping">Was Sleeping?</label>
       </div>
-      <button type="submit" className="btn-btn-secondary" onClick={this.createBirb}>Submit</button>
+      <button type="submit" className="btn-btn-secondary" onClick={this.saveBirb}>Save Birb</button>
     </form>
     );
   }

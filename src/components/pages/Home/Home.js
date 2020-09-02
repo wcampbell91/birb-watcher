@@ -34,9 +34,8 @@ class Home extends React.Component {
     return (
       <div className="Home mt-2">
         <h1>Home!</h1>
-        <button className="btn btn-dark" onClick={this.editBirbEvent}>Edit A Birb</button>
-          <Link to="/new">New Birb</Link>
-          <Link to="/birbs/birb123312">Specific Birb</Link>
+        <button className="btn btn-dark mr-2" onClick={this.editBirbEvent}>Edit A Birb</button>
+          <Link to="/new" className="btn btn-dark">New Birb</Link>
         <div className="card-columns">
           { birbCards }
         </div>
