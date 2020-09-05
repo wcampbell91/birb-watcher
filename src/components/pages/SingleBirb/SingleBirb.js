@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import birbData from '../../../helpers/data/birbData';
 
 class SingleBirb extends React.Component {
@@ -27,6 +28,8 @@ class SingleBirb extends React.Component {
 
   render() {
     const { birb } = this.state;
+    const { birbId } = this.props.match.params;
+    const editLink = `/edit/${birbId}`;
     return (
     <div className="justify-content-center">
       <div className="card mt-3 bg-dark text-light">
@@ -57,6 +60,7 @@ class SingleBirb extends React.Component {
         </ul>
         <div className="card-text-muted">Last Seen: {birb.seenAt}</div>
         <button className="btn-danger ml-2" onClick={this.deleteBirbEvent}><i className="fas fa-lg fa-trash-alt"></i></button>
+        <Link to={editLink} className="btn btn-primary"><i className="far fa-edit fa-lg"></i></Link>
       </div>
     </div>
     );
