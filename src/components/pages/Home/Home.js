@@ -26,16 +26,25 @@ class Home extends React.Component {
     this.props.history.push(`/edit/${birbId}`);
   };
 
+  deleteBirb = (birbId) => {
+    birbData.deleteBirb(birbId)
+      .then((res) => {
+        this.getBirbs();
+        console.error(res);
+      })
+      .catch((err) => console.error(err));
+  };
+
   render() {
     const { birbs } = this.state;
 
-    const birbCards = birbs.map((birb) => <BirbCards key={birb.id} birb={birb}/>);
+    const birbCards = birbs.map((birb) => <BirbCards key={birb.id} birb={birb} deleteBirb={this.deleteBirb}/>);
 
     return (
       <div className="Home mt-2">
         <h1>Home!</h1>
         <button className="btn btn-dark mr-2" onClick={this.editBirbEvent}>Edit A Birb</button>
-          <Link to="/new" className="btn btn-dark">New Birb</Link>
+          <Link to="/new" className="btn btn-dark ">New Birb</Link>
         <div className="card-columns">
           { birbCards }
         </div>
