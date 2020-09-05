@@ -17,9 +17,12 @@ const getBirbById = (birbId) => axios.get(`${baseUrl}/birbs/${birbId}.json`);
 
 const deleteBirb = (birbId) => axios.delete(`${baseUrl}/birbs/${birbId}.json`);
 
+const updateBirb = (birbId, newBirb) => axios.put(`${baseUrl}/birbs/${birbId}.json`, newBirb);
+
 export default {
   getBirbsByUid,
   getBirbById,
   addBirb,
   deleteBirb,
+  updateBirb,
 };
