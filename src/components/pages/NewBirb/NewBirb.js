@@ -170,7 +170,7 @@ class NewBirb extends React.Component {
         value={ wasSleeping }
         onChange={this.changeSleepEvent}
         />
-        <label class="form-check-label" htmlFor="wasSleeping">Was Sleeping?</label>
+        <label className="form-check-label" htmlFor="wasSleeping">Was Sleeping?</label>
       </div>
       <button type="submit" className="btn-btn-secondary" onClick={this.saveBirb}>Save Birb</button>
     </form>

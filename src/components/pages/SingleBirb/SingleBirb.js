@@ -13,6 +13,18 @@ class SingleBirb extends React.Component {
       .catch((err) => console.error('get single birb broke', err));
   }
 
+  deleteBirbEvent = (e) => {
+    e.preventDefault();
+    const { birbId } = this.props.match.params;
+
+    birbData.deleteBirb(birbId)
+      .then((res) => {
+        this.props.history.push('/home');
+        console.error(res);
+      })
+      .catch((err) => console.error(err));
+  };
+
   render() {
     const { birb } = this.state;
     return (
@@ -44,6 +56,7 @@ class SingleBirb extends React.Component {
           </li>
         </ul>
         <div className="card-text-muted">Last Seen: {birb.seenAt}</div>
+        <button className="btn-danger ml-2" onClick={this.deleteBirbEvent}><i className="fas fa-lg fa-trash-alt"></i></button>
       </div>
     </div>
     );
